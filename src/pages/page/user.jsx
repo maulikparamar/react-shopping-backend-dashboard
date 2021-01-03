@@ -1,6 +1,6 @@
 import React from "react";
 //import { Redirect } from "react-router-dom";
-import Tables from "../tables";
+import Table from "../tables/table";
 //import tokenCheck from "../utility/tokenCheck";
 function User() {
   // if (!tokenCheck()) {
@@ -27,7 +27,7 @@ function User() {
   return (
     <div>
       <div className="main">
-        <Tables tablehead={Head} tablevalue={value} name="maulik" />
+        <Table tablehead={Head} tablevalue={value} name="Category" />
       </div>
     </div>
   );
