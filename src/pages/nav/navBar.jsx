@@ -45,6 +45,9 @@ const NavBar = (props) => {
         <Link className="atag" to="/user" onClick={closeNav}>
           User Details
         </Link>
+        <Link className="atag" to="/user" onClick={closeNav}>
+          Shopping user Details
+        </Link>
         <button className="dropdown-btn atag" onClick={dropDown}>
           Product Details
           <i className="fa fa-caret-down"></i>

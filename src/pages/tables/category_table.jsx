@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { category } from "../../axios";
+import { categoryUpdate } from "../../axios/updateData";
+import { categoryDelete } from "../../axios/deleteData";
 const Table = ({ tablehead, tablevalue, name }) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState("");
@@ -14,9 +17,14 @@ const Table = ({ tablehead, tablevalue, name }) => {
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
-  const submit = () => {
-    console.log(value);
-    console.log(id);
+  const submit = async () => {
+    if (id !== undefined) {
+      await categoryUpdate(id, value.category);
+      window.location.reload();
+    } else {
+      await category(value.category);
+      window.location.reload();
+    }
     setShow(false);
   };
 
@@ -25,9 +33,9 @@ const Table = ({ tablehead, tablevalue, name }) => {
     setId(e);
     setPlace(user);
   };
-  const deletetable = (t) => {
-    const table = tablevalue.filter((e) => e.id !== t);
-    console.log(table);
+  const deletetable = async (id) => {
+    await categoryDelete(id);
+    window.location.reload();
   };
   return (
     <React.Fragment>
@@ -48,12 +56,12 @@ const Table = ({ tablehead, tablevalue, name }) => {
           {tablevalue.map((e, i) => {
             return (
               <tr key={i}>
-                <th scope="row">{e.id}</th>
-                <td>{e.username}</td>
+                <th scope="row">{i + 1}</th>
+                <td>{e.category}</td>
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => update(e.id, e.username)}
+                    onClick={() => update(e.id, e.category)}
                   >
                     Update
                   </button>

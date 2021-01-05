@@ -20,7 +20,7 @@ function Login() {
     console.log(t);
     if (t.status === "pass") {
       localStorage.setItem("json-t", t.token);
-      window.location.href = "/home";
+      window.location.href = "/dashboard";
     } else {
       console.log(t);
       setShow({ ...show, display: "block", msg: t });
@@ -31,7 +31,7 @@ function Login() {
   }
 
   if (tokenCheck()) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

@@ -12,4 +12,10 @@ async function register(username, password) {
     .then((e) => e.data);
 }
 
-module.exports = { login, register };
+async function category(category) {
+  return axios
+    .post(`${process.env.REACT_APP_URl}/category`, { category })
+    .then((e) => e.data);
+}
+
+module.exports = { login, register, category };

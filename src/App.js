@@ -5,7 +5,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import login from "./pages/login";
+import Login from "./pages/login";
 import NotFound from "./pages/404";
 import register from "./pages/register";
 import NavBar from "./pages/nav/navBar";
@@ -21,7 +21,6 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={login} />
         <Route exact path="/dashboard">
           <NavBar />
           <Dashboard />
@@ -54,6 +53,7 @@ function App() {
           <NavBar />
           <Contact />
         </Route>
+        <Route exact path="/" component={Login} />
         <Route exact path="/register" component={register} />
         <Route exact path="/404" component={NotFound} />
         <Redirect to="/404" />
