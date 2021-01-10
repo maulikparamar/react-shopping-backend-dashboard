@@ -17,5 +17,10 @@ async function category(category) {
     .post(`${process.env.REACT_APP_URl}/category`, { category })
     .then((e) => e.data);
 }
+async function product_brand(category_id, brand) {
+  return axios
+    .post(`${process.env.REACT_APP_URl}/product_brand`, { category_id, brand })
+    .then((e) => e.data);
+}
 
-module.exports = { login, register, category };
+module.exports = { login, register, category, product_brand };

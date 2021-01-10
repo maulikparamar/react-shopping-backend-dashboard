@@ -8,18 +8,24 @@ function Category() {
   //   return <Redirect to="/" />;
   // }
   const [data, setData] = useState([]);
+  const [update, setUpdate] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const result = await Data("category_table");
       setData(result.data.recordset);
     };
     fetchData();
-  }, []);
+  }, [update]);
   const Head = ["id", "Category", "update", "delete"];
   return (
     <div>
       <div className="main">
-        <Table tablehead={Head} tablevalue={data} name="Category" />
+        <Table
+          tablehead={Head}
+          tablevalue={data}
+          setUpdate={setUpdate}
+          name="Category"
+        />
         {data.length === 0 ? (
           <div>
             <h2>No data</h2>

@@ -1,40 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { category } from "../../axios";
-import { categoryUpdate } from "../../axios/updateData";
-import { categoryDelete } from "../../axios/deleteData";
+import { product_brand } from "../../axios";
+import { product_brandUpdate } from "../../axios/updateData";
+import { product_brandDelete } from "../../axios/deleteData";
+import { Data } from "../../axios/getData";
 const Table = ({ tablehead, tablevalue, name, setUpdate }) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState("");
   const [place, setPlace] = useState("");
+  const [sele, setSelect] = useState(0);
+  const [data, setData] = useState([]);
   const [id, setId] = useState();
   const handleClose = () => setShow(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await Data("category_table");
+      setData(result.data.recordset);
+    };
+    fetchData();
+  }, []);
   const addButton = () => {
+    setSelect();
     setId();
     setPlace();
     setShow(true);
   };
   const handleChange = (e) => {
+    setSelect();
     setValue({ ...value, [e.target.name]: e.target.value });
   };
+
   const submit = async () => {
-    if (id !== undefined) {
-      await categoryUpdate(id, value.category);
-      setUpdate((t) => !t);
+    if (value.category === "Select Category" || value === "") {
+      alert("Places Select Category");
+      setShow(true);
     } else {
-      await category(value.category, value.productbrand);
-      setUpdate((t) => !t);
+      if (id !== undefined) {
+        await product_brandUpdate(id, value.category, value.productbrand);
+        setUpdate((t) => !t);
+      } else {
+        await product_brand(value.category, value.productbrand);
+        setUpdate((t) => !t);
+      }
+      setShow(false);
     }
-    setShow(false);
   };
 
-  const update = (e, user) => {
+  const update = (e, category, brand) => {
     setShow(true);
+    const check = data.filter((e) => e.category === category);
+    setSelect(check[0].id);
+    setValue({ ...value, category: check[0].id });
     setId(e);
-    setPlace(user);
+    setPlace(brand);
   };
   const deletetable = async (id) => {
-    await categoryDelete(id);
+    await product_brandDelete(id);
     setUpdate((t) => !t);
   };
   return (
@@ -58,10 +79,11 @@ const Table = ({ tablehead, tablevalue, name, setUpdate }) => {
               <tr key={i}>
                 <th scope="row">{i + 1}</th>
                 <td>{e.category}</td>
+                <td>{e.brand}</td>
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => update(e.id, e.category)}
+                    onClick={() => update(e.id, e.category, e.brand)}
                   >
                     Update
                   </button>
@@ -90,16 +112,37 @@ const Table = ({ tablehead, tablevalue, name, setUpdate }) => {
         <Modal.Body>
           <form>
             <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Category</label>
+              <label htmlFor="exampleFormControlSelect1">Category</label>
+              <select
+                className="form-control"
+                id="exampleFormControlSelect1"
+                onChange={handleChange}
+                name="category"
+                value={sele}
+              >
+                <option defaultValue value="men">
+                  Select Category
+                </option>
+                {data.map((e) => {
+                  return (
+                    <option key={e.id} value={e.id}>
+                      {e.category}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Brand</label>
               <input
                 autoFocus
                 type="text"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                placeholder={place || "Enter Category"}
+                placeholder={place || "Enter Brand"}
                 onChange={handleChange}
-                name="category"
+                name="productbrand"
               />
             </div>
           </form>

@@ -6,5 +6,14 @@ async function categoryUpdate(id, category) {
     .put(`${process.env.REACT_APP_URl}/category_table`, { id, category })
     .then((e) => e.data);
 }
+async function product_brandUpdate(id, category_id, brand) {
+  return axios
+    .put(`${process.env.REACT_APP_URl}/product_brand`, {
+      id,
+      category_id,
+      brand,
+    })
+    .then((e) => e.data);
+}
 
-module.exports = { categoryUpdate };
+module.exports = { categoryUpdate, product_brandUpdate };
