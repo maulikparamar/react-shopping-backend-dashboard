@@ -77,25 +77,35 @@ const Table = ({ tablehead, tablevalue, name }) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Category</Modal.Title>
+          <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
             <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Category</label>
+              <label htmlFor="exampleInputEmail1">{name}</label>
               <input
                 autoFocus
                 type="text"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                placeholder={place || "Enter Category"}
+                placeholder={place || "Enter User"}
                 onChange={handleChange}
-                name="category"
+                name="user"
               />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Password</label>
+              <input
+                autoFocus
+                type="text"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder={"Enter Password"}
+                onChange={handleChange}
+                name="password"
+              />
             </div>
           </form>
         </Modal.Body>

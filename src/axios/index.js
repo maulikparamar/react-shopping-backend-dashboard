@@ -22,5 +22,24 @@ async function product_brand(category_id, brand) {
     .post(`${process.env.REACT_APP_URl}/product_brand`, { category_id, brand })
     .then((e) => e.data);
 }
+async function product_table(
+  category_id,
+  product_name,
+  product_brand_id,
+  price,
+  image
+) {
+  return axios
+    .post(
+      `${process.env.REACT_APP_URl}/product_table`,
+      { category_id, product_name, product_brand_id, price, image },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((e) => e.data);
+}
 
-module.exports = { login, register, category, product_brand };
+module.exports = { login, register, category, product_brand, product_table };

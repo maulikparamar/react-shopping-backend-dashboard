@@ -11,7 +11,7 @@ function ProductBrand() {
   const [update, setUpdate] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await Data("product_brand");
+      const result = await Data("product_table");
       setData(result.data.recordset);
     };
     fetchData();
@@ -21,6 +21,8 @@ function ProductBrand() {
     "Category",
     "Product Brand",
     "Product Name",
+    "Price",
+    "image",
     "update",
     "delete",
   ];

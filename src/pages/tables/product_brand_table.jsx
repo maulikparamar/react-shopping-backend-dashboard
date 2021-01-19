@@ -120,9 +120,7 @@ const Table = ({ tablehead, tablevalue, name, setUpdate }) => {
                 name="category"
                 value={sele}
               >
-                <option defaultValue value="men">
-                  Select Category
-                </option>
+                <option defaultValue>Select Category</option>
                 {data.map((e) => {
                   return (
                     <option key={e.id} value={e.id}>

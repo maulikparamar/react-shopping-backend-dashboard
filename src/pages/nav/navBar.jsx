@@ -77,14 +77,6 @@ const NavBar = (props) => {
           >
             Product Table
           </Link>
-          <Link
-            className="atag"
-            style={{ fontSize: "20px " }}
-            to="/product_multiple_images"
-            onClick={closeNav}
-          >
-            Product Multiple Images
-          </Link>
         </div>
         <Link className="atag" to="/product_feedback" onClick={closeNav}>
           Product FeedBack

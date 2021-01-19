@@ -13,7 +13,7 @@ import Category from "./pages/page/category";
 import Dashboard from "./pages/page/dashboard";
 import ProductBrand from "./pages/page/product_brand";
 import ProductTable from "./pages/page/product_table";
-import ProductMultipleImages from "./pages/page/product_multiple_images";
+
 import ProductFeedback from "./pages/page/product_feedback";
 import Contact from "./pages/page/contact";
 import User from "./pages/page/user";
@@ -41,10 +41,7 @@ function App() {
           <NavBar />
           <ProductTable />
         </Route>
-        <Route exact path="/product_multiple_images">
-          <NavBar />
-          <ProductMultipleImages />
-        </Route>
+
         <Route exact path="/product_feedback">
           <NavBar />
           <ProductFeedback />

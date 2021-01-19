@@ -14,6 +14,7 @@ const Table = ({ tablehead, tablevalue, name, setUpdate }) => {
     setPlace();
     setShow(true);
   };
+
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
